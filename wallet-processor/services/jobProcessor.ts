@@ -28,7 +28,8 @@ export class JobProcessor {
                 customer_id: tr.customer_id,
                 success: true,
             });
-            if (tr.value > ccObj[tr.customer_id].credit_card.ballance) {
+            const ballance = !ccObj[tr.customer_id] ? 0 : ccObj[tr.customer_id].credit_card.ballance;
+            if (tr.value > ballance) {
                 newTransaction.success = false;
             } else {
                 await Customer.findByIdAndUpdate(tr.customer_id, {

@@ -20,7 +20,7 @@ services:
 
   mongo-express:
     image: mongo-express
-    restart: "no"
+    restart: "always"
     container_name: wallet-mongo-admin
     ports:
       - 8091:8081
