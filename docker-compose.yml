@@ -30,3 +30,14 @@ services:
       - mongo-v4
     networks:
       - wallet-network
+
+  redis:
+    image: redis:6.2-alpine
+    restart: "no"
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - ./volumes/redis:/data
+    networks:
+      - wallet-network

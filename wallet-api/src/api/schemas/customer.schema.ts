@@ -6,7 +6,8 @@ interface CreditCard {
 }
 
 export enum CustomerStatus {
-  INACTIVE, ACTIVE
+  INACTIVE,
+  ACTIVE,
 }
 
 export interface Customer extends Document {
@@ -29,6 +30,6 @@ export const CustomerSchema = new Schema({
   },
   status: {
     type: Number,
-    enum: CustomerStatus
-  }
+    enum: CustomerStatus,
+  },
 });

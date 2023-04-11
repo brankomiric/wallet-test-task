@@ -24,7 +24,7 @@ export class CustomerService {
       throw new NotFoundException(`Customer id ${id} doesn't exist`);
     }
     if (apiKey && process.env.API_KEY != apiKey) {
-      throw new BadRequestException("Incorrect Api Key");
+      throw new BadRequestException('Incorrect Api Key');
     }
     const output: CustomerDto = {
       name: `${result.first_name} ${result.last_name}`,
@@ -60,9 +60,9 @@ export class CustomerService {
     );
 
     const output: CustomerDto = {
-        name: `${result.first_name} ${result.last_name}`,
-        ballance: result.credit_card.ballance
-      };
+      name: `${result.first_name} ${result.last_name}`,
+      ballance: result.credit_card.ballance,
+    };
 
     return output;
   }

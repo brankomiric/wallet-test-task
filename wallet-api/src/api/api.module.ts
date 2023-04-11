@@ -7,6 +7,6 @@ import { CustomerService } from './customer.service';
 @Module({
   imports: [DatabaseModule],
   controllers: [CustomerController],
-  providers: [CustomerService, ...customersProviders]
+  providers: [CustomerService, ...customersProviders],
 })
 export class ApiModule {}

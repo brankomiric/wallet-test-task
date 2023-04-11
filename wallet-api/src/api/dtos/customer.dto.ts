@@ -1,4 +1,4 @@
 export class Customer {
-    name: string;
-    ballance?: number;
+  name: string;
+  ballance?: number;
 }

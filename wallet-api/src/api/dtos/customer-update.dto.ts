@@ -1,4 +1,4 @@
 export class CustomerUpdate {
-    name?: string;
-    ballance?: number;
+  name?: string;
+  ballance?: number;
 }

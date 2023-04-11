@@ -13,14 +13,18 @@ export class TransactionController {
   constructor(private transactionService: TransactionService) {}
 
   @Post()
-  getCustomer(
+  async getCustomer(
     @Headers('api_key') apiKey: string,
     @Body() transactions: Transaction[],
   ) {
     if (apiKey != process.env.API_KEY) {
       throw new BadRequestException('Invalid Api Key');
     }
-    const sortedTransactions = this.transactionService.sortTransactions(transactions);
-    return sortedTransactions;
+    const sortedTransactions =
+      this.transactionService.sortTransactions(transactions);
+    const chunksCount = await this.transactionService.enqueueTransactions(
+      sortedTransactions,
+    );
+    return { message: `Sent ${chunksCount} chunks to processor` };
   }
 }

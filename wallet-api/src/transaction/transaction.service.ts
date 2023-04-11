@@ -1,9 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { Queue } from 'bullmq';
+import { v4 as uuidv4 } from 'uuid';
 import { Transaction } from './dtos/transaction.dto';
 
 @Injectable()
 export class TransactionService {
-    
+  private queue = new Queue('TransactionQueue', {
+    connection: {
+      host: process.env.REDIS_HOST,
+      port: +process.env.REDIS_PORT,
+    },
+  });
+
   sortTransactions(transactions: Transaction[]) {
     const latencyLimit = 1000;
     const data = transactions.sort((a, b) => {
@@ -41,5 +49,16 @@ export class TransactionService {
       }
       return 0;
     });
+  }
+
+  async enqueueTransactions(transactions: Transaction[][]) {
+    const queueInput = transactions.map((t) => {
+      return {
+        name: uuidv4(),
+        data: t,
+      };
+    });
+    const response = await this.queue.addBulk(queueInput);
+    return response.length;
   }
 }
