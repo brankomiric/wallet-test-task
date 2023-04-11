@@ -1,0 +1,32 @@
+version: "3.4"
+
+networks:
+  wallet-network:
+    driver: bridge
+
+services:
+  mongo-v4:
+    image: mongo:4.0
+    restart: "no"
+    container_name: wallet-mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: wallet
+    volumes:
+      - ./volumes/mongo:/data/db
+    networks:
+      - wallet-network
+
+  mongo-express:
+    image: mongo-express
+    restart: "no"
+    container_name: wallet-mongo-admin
+    ports:
+      - 8091:8081
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongo-v4:27017
+    depends_on:
+      - mongo-v4
+    networks:
+      - wallet-network
