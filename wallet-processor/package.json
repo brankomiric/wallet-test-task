@@ -1,0 +1,29 @@
+{
+  "name": "wallet-processor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/app.js",
+    "watch": "nodemon app.ts",
+    "build": "rm -rf ./dist && ./node_modules/typescript/bin/tsc -b --verbose",
+    "prettier": "npx prettier --write \"./**/*.ts\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.7",
+    "prettier-plugin-organize-imports": "^3.2.2",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "bullmq": "^3.10.4",
+    "dotenv": "^16.0.3",
+    "mongoose": "^7.0.3"
+  }
+}
