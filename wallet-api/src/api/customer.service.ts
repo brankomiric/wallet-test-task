@@ -23,8 +23,8 @@ export class CustomerService {
     if (!result) {
       throw new NotFoundException(`Customer id ${id} doesn't exist`);
     }
-    if (apiKey && result.api_key != apiKey) {
-      throw new BadRequestException("Customer id and api key don't match");
+    if (apiKey && process.env.API_KEY != apiKey) {
+      throw new BadRequestException("Incorrect Api Key");
     }
     const output: CustomerDto = {
       name: `${result.first_name} ${result.last_name}`,

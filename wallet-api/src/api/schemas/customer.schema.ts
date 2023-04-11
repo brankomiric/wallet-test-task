@@ -12,7 +12,6 @@ export enum CustomerStatus {
 export interface Customer extends Document {
   readonly first_name: string;
   readonly last_name: string;
-  readonly api_key: string;
   readonly credit_card: CreditCard;
   readonly status: CustomerStatus;
 }
@@ -20,7 +19,6 @@ export interface Customer extends Document {
 export const CustomerSchema = new Schema({
   first_name: { type: String },
   last_name: { type: String },
-  api_key: { type: String },
   credit_card: {
     cc_number: {
       type: String,
